@@ -1,0 +1,104 @@
+##############
+#zplug
+source ~/.zplug/init.zsh
+
+zplug "plugins/git", from:oh-my-zsh
+
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+
+# theme (https://github.com/sindresorhus/pure#zplug)
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+
+# Syntax highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+
+# history
+zplug "zsh-users/zsh-history-substring-search"
+
+# autocomplete
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "chrissicool/zsh-256color"
+zstyle ':completion:*' menu select
+
+# move
+zplug "jhawthorn/fzy", as:command, rename-to:fzy, hook-build:"make && sudo make install"
+#zplug "peco/peco", as:command, from:gh-r
+zplug "b4b4r07/enhancd", use:init.sh
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose ; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
+###############
+
+# 環境変数
+export LANG=ja_JP.UTF-8
+
+# ヒストリの設定
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+# 直前のコマンドの重複を削除
+setopt hist_ignore_dups
+# 同じコマンドをヒストリに残さない
+setopt hist_ignore_all_dups
+# 同時に起動したzshの間でヒストリを共有
+setopt share_history
+
+# 補完機能を有効にする
+autoload -Uz compinit
+compinit -u
+if [ -e /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+    fi
+# 補完で小文字でも大文字にマッチさせる
+    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# 補完候補を詰めて表示
+    setopt list_packed
+# 補完候補一覧をカラー表示
+    zstyle ':completion:*' list-colors ''
+
+# コマンドのスペルを訂正
+setopt correct
+# ビープ音を鳴らさない
+setopt no_beep
+
+# prompt
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{magenta}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{yellow}+"
+zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd() { vcs_info }
+PROMPT='%F{green}%c%f %F{yellow}$%f '
+#PROMPT='%n@%m:%F{green}%c%f %F{yellow}$%f '
+#PROMPT='%m:%F{green}%~%f %n %F{yellow}$%f '
+#RPROMPT='${vcs_info_msg_0_}'
+
+# alias
+alias ls='ls -F'
+alias ll='ls -l'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias vi='vim'
+alias cat='cat -n'
+alias less='less -NM'
+export CLICOLOR=1
+export LSCOLORS=DxGxcxdxCxegedabagacad
+
+# curl
+setopt nonomatch
+
+alias bc='bc; stty stop undef'
