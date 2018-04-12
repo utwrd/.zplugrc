@@ -24,7 +24,7 @@ zplug "chrissicool/zsh-256color"
 zstyle ':completion:*' menu select
 
 # move
-zplug "jhawthorn/fzy", as:command, rename-to:fzy, hook-build:"make && sudo make install"
+#zplug "jhawthorn/fzy", as:command, rename-to:fzy, hook-build:"make && sudo make install"
 #zplug "peco/peco", as:command, from:gh-r
 zplug "b4b4r07/enhancd", use:init.sh
 
