@@ -100,5 +100,5 @@ export LSCOLORS=DxGxcxdxCxegedabagacad
 
 # curl
 setopt nonomatch
-
+#bc
 alias bc='bc; stty stop undef'
