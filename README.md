@@ -1,5 +1,5 @@
 # rcfiles
-setting of zplug
+my setting files
 
 ## .zplugrc
 read my zplug 
