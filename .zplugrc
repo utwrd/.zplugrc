@@ -88,11 +88,11 @@ PROMPT='%F{green}%c%f %F{yellow}$%f '
 
 # alias
 alias ls='ls -F'
-alias ll='ls -l'
+alias ll='ls -lta'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias vi='vim'
+#alias vi='vim'
 #alias cat='cat -n'
 alias less='less -NM'
 export CLICOLOR=1
