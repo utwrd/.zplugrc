@@ -64,10 +64,15 @@ if [ -e /usr/local/share/zsh-completions ]; then
 # 補完候補一覧をカラー表示
     zstyle ':completion:*' list-colors ''
 
+# compatible tac command (used by peco-hist-sel)
+if ! which tac >/dev/null; then
+    alias tac="tail -r"
+fi
+
 # Ctrl-R with peco
 # Copy right from https://qiita.com/shepabashi/items/f2bc2be37a31df49bca5
 function peco-history-selection() {
-    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    BUFFER=`history -n 1 | tac | awk '!a[$0]++' | peco`
     CURSOR=$#BUFFER
     zle reset-prompt
 }
