@@ -6,11 +6,11 @@ read my zplug
 
 ### write in ~/.zshrc 
 ``` 
-source ~/.zplug/init.zsh
-zplug "utwrd/rcfiles", use:.zplugrc, hook-load:"zplug load --verbose"
-zplug load --verbose
+source $HOME/.zplug/init.zsh
+source /path/to/dir/.zplugrc
 ``` 
-## proxy
+
+### write in ~/.vimrc
 ```
-zplug "utwrd/rcfiles" use:proxy.sh
+source $RCFILES/.vimrc "$RCFILES has defined in .zplugrc
 ```

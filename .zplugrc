@@ -114,3 +114,6 @@ export LSCOLORS=DxGxcxdxCxegedabagacad
 setopt nonomatch
 #bc
 alias bc='bc; stty stop undef'
+
+# set var for this plugin dir
+export RCFILES=$(cd $(dirname $0); pwd)
